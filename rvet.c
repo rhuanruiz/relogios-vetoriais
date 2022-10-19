@@ -32,13 +32,15 @@ void Receive(int pid, int recebe_de, Clock *clock){
    
    Clock clock2;
    
-   MPI_Recv(&clock2, 3, MPI_INT, recebe_de, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
    Event(pid, clock);
+   MPI_Recv(&clock2, 3, MPI_INT, recebe_de, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
    
-   for(int i = 0; i < 3; i++){
-      if(clock2.p[i] > clock ->p[i]){
+   int i = 0;
+   while(i < 3){
+      if(clock2.p[i] > clock->p[i]){
          clock->p[i] = clock2.p[i];
       }
+   i++;
    }
 
 }
